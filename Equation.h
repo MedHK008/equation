@@ -29,6 +29,8 @@ public:
 
     double evaluate() const;
 
+    double applyOp(double a, double b, char op) const;
+
 };
 
 #endif // EQUATION_H

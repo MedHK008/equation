@@ -50,20 +50,21 @@ bool Equation::isValid() const {
     }
     return balance == 0 && !lastWasOperator;
 }
+double Equation::applyOp(double a, double b, char op) const {
+    switch (op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return a / b;
+        default: throw invalid_argument("Invalid operator");
+    }
+}
 
 double Equation::evaluate() const {
     stack<double> values;
     stack<char> ops;
 
-    auto applyOp = [](double a, double b, char op) -> double {
-        switch (op) {
-            case '+': return a + b;
-            case '-': return a - b;
-            case '*': return a * b;
-            case '/': return a / b;
-            default: throw invalid_argument("Invalid operator");
-        }
-    };
+    
 
     for (const auto &element : elements) {
         if (auto num = dynamic_cast<Number*>(element)) {
@@ -72,9 +73,12 @@ double Equation::evaluate() const {
             while (!ops.empty() && ops.top() != '(' && 
                    (op->getPrecedence() < Operator(ops.top()).getPrecedence() ||
                    (op->getPrecedence() == Operator(ops.top()).getPrecedence() && op->isLeftAssociative()))) {
-                double val2 = values.top(); values.pop();
-                double val1 = values.top(); values.pop();
-                char oper = ops.top(); ops.pop();
+                double val2 = values.top(); 
+                values.pop();
+                double val1 = values.top(); 
+                values.pop();
+                char oper = ops.top(); 
+                ops.pop();
                 values.push(applyOp(val1, val2, oper));
             }
             ops.push(op->getOperator());
@@ -83,9 +87,12 @@ double Equation::evaluate() const {
                 ops.push('(');
             } else {
                 while (!ops.empty() && ops.top() != '(') {
-                    double val2 = values.top(); values.pop();
-                    double val1 = values.top(); values.pop();
-                    char oper = ops.top(); ops.pop();
+                    double val2 = values.top(); 
+                    values.pop();
+                    double val1 = values.top(); 
+                    values.pop();
+                    char oper = ops.top(); 
+                    ops.pop();
                     values.push(applyOp(val1, val2, oper));
                 }
                 ops.pop();

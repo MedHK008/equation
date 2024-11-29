@@ -1,0 +1,7 @@
+# ninja log v5
+7	42	7545983539239349	CMakeFiles/EquationEvaluator.dir/Number.cpp.obj	d1b79b1e982add21
+9	43	7545983539239349	CMakeFiles/EquationEvaluator.dir/Operator.cpp.obj	c1849d08382e2ea1
+11	46	7545983539276304	CMakeFiles/EquationEvaluator.dir/Parenthesis.cpp.obj	57045214c156526f
+2	281	7545983541627480	CMakeFiles/EquationEvaluator.dir/main.cpp.obj	82254a9ddbd29267
+5	311	7545983541917529	CMakeFiles/EquationEvaluator.dir/Equation.cpp.obj	9f908b8a0603ff12
+311	492	7545983543608742	EquationEvaluator.exe	ed6a9f9eeb002e11
